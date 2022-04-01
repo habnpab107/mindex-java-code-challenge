@@ -1,7 +1,8 @@
 package com.mindex.challenge.service.impl;
 
-import com.mindex.challenge.data.Employee;
-import com.mindex.challenge.service.EmployeeService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +16,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
+import com.mindex.challenge.service.EmployeeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -97,7 +99,7 @@ public class EmployeeServiceImplTest {
     @Test
     public void testReportingStructure_PM() {
     	
-    	String employeeId_PM = "16a596ae-edd3-4847-99fe-c4518e82c86f";
+    	String employeeId_PM = "b7839309-3348-463b-a7e3-5de1c168beb3";
     	
         // Read PM employee
         Employee readEmployee = restTemplate.getForEntity(employeeIdUrl, Employee.class, employeeId_PM).getBody();
@@ -118,7 +120,7 @@ public class EmployeeServiceImplTest {
         // Read RS employee
         Employee readEmployee = restTemplate.getForEntity(employeeIdUrl, Employee.class, employeeId_RS).getBody();
         assertNotNull(readEmployee.getEmployeeId());
-        assertEquals(employeeId_PM, readEmployee.getEmployeeId());
+        assertEquals(employeeId_RS, readEmployee.getEmployeeId());
 
         // Read checks
         ReportingStructure reportingStructure = restTemplate.getForEntity(reportingStructureUrl, ReportingStructure.class, readEmployee.getEmployeeId()).getBody();
